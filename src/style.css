@@ -249,27 +249,3 @@ html {
   box-shadow: none !important;
   border-radius: 0 !important;
 }
-
-/* Стили для логотипа QAZKOMNET */
-.logo-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.logo-hover:hover {
-  transform: scale(1.05);
-  filter: drop-shadow(0 4px 8px rgba(59, 130, 246, 0.3));
-}
-
-/* Анимация логотипа */
-@keyframes logo-pulse {
-  0%, 100% {
-    filter: brightness(1);
-  }
-  50% {
-    filter: brightness(1.1) drop-shadow(0 0 10px rgba(59, 130, 246, 0.4));
-  }
-}
-
-.animate-logo-pulse {
-  animation: logo-pulse 3s ease-in-out infinite;
-}
