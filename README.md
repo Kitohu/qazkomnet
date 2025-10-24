@@ -1,4 +1,4 @@
-# AMANATS - IT Solutions Website 🚀
+# QAZKOMNET - IT Solutions Website 🚀
 
 ## 🎨 Анимации и Эффекты
 
