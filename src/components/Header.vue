@@ -10,26 +10,34 @@
 
         <!-- Desktop Navigation -->
         <nav class="hidden md:flex items-center space-x-8" data-aos="fade-left">
-          <a href="#" class="text-gray-700 hover:text-blue-600 transition-all duration-300 relative group">
-            Главная
+          <a
+            v-for="item in navItems"
+            :key="item.href"
+            :href="item.href"
+            class="text-gray-700 hover:text-blue-600 transition-all duration-300 relative group"
+          >
+            {{ item.label }}
             <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
           </a>
-          <a href="#directions" class="text-gray-700 hover:text-blue-600 transition-all duration-300 relative group">
-            Направления
-            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="#about" class="text-gray-700 hover:text-blue-600 transition-all duration-300 relative group">
-            О Компании
-            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="#services" class="text-gray-700 hover:text-blue-600 transition-all duration-300 relative group">
-            Услуги
-            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="#contacts" class="text-gray-700 hover:text-blue-600 transition-all duration-300 relative group">
-            Контакты
-            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-          </a>
+          <div class="flex items-center space-x-3 pl-6 border-l border-gray-200">
+            <button
+              type="button"
+              class="relative flex items-center bg-gray-100 hover:bg-gray-200 transition-all duration-300 rounded-full px-3 py-1.5"
+              role="switch"
+              :aria-checked="isEnglish"
+              @click="toggleLocale"
+            >
+              <span class="sr-only">{{ t('header.switch.label') }}</span>
+              <span class="text-xs font-semibold tracking-wide" :class="isEnglish ? 'text-gray-500' : 'text-blue-600'">{{ t('header.switch.ru') }}</span>
+              <span class="mx-2 h-5 w-10 bg-white rounded-full border border-gray-200 flex items-center transition-colors duration-300">
+                <span
+                  class="h-4 w-4 rounded-full bg-blue-600 shadow-sm transition-transform duration-300"
+                  :style="{ transform: isEnglish ? 'translateX(20px)' : 'translateX(0)' }"
+                ></span>
+              </span>
+              <span class="text-xs font-semibold tracking-wide" :class="isEnglish ? 'text-blue-600' : 'text-gray-500'">{{ t('header.switch.en') }}</span>
+            </button>
+          </div>
         </nav>
 
         <!-- Mobile Menu Button -->
@@ -54,22 +62,36 @@
         leave-to-class="transform -translate-y-full opacity-0">
         <div v-if="mobileMenuOpen" class="md:hidden py-4 border-t bg-white/95 backdrop-blur-md">
           <nav class="flex flex-col space-y-4">
-            <a href="#" class="text-gray-700 hover:text-blue-600 transition-all duration-300 py-2 px-4 rounded-lg hover:bg-blue-50 transform hover:translate-x-2">
-              Главная
-            </a>
-            <a href="#directions" class="text-gray-700 hover:text-blue-600 transition-all duration-300 py-2 px-4 rounded-lg hover:bg-blue-50 transform hover:translate-x-2">
-              Направления
-            </a>
-            <a href="#about" class="text-gray-700 hover:text-blue-600 transition-all duration-300 py-2 px-4 rounded-lg hover:bg-blue-50 transform hover:translate-x-2">
-              О Компании
-            </a>
-            <a href="#services" class="text-gray-700 hover:text-blue-600 transition-all duration-300 py-2 px-4 rounded-lg hover:bg-blue-50 transform hover:translate-x-2">
-              Услуги
-            </a>
-            <a href="#contacts" class="text-gray-700 hover:text-blue-600 transition-all duration-300 py-2 px-4 rounded-lg hover:bg-blue-50 transform hover:translate-x-2">
-              Контакты
+            <a
+              v-for="item in navItems"
+              :key="`mobile-${item.href}`"
+              :href="item.href"
+              class="text-gray-700 hover:text-blue-600 transition-all duration-300 py-2 px-4 rounded-lg hover:bg-blue-50 transform hover:translate-x-2"
+            >
+              {{ item.label }}
             </a>
           </nav>
+
+          <div class="flex items-center justify-between px-4 pt-4 border-t border-gray-100">
+            <span class="text-sm text-gray-500">{{ t('header.switch.label') }}</span>
+            <button
+              type="button"
+              class="relative flex items-center bg-gray-100 hover:bg-gray-200 transition-all duration-300 rounded-full px-3 py-1.5"
+              role="switch"
+              :aria-checked="isEnglish"
+              @click="toggleLocale"
+            >
+              <span class="sr-only">{{ t('header.switch.label') }}</span>
+              <span class="text-xs font-semibold tracking-wide" :class="isEnglish ? 'text-gray-500' : 'text-blue-600'">{{ t('header.switch.ru') }}</span>
+              <span class="mx-2 h-5 w-10 bg-white rounded-full border border-gray-200 flex items-center transition-colors duration-300">
+                <span
+                  class="h-4 w-4 rounded-full bg-blue-600 shadow-sm transition-transform duration-300"
+                  :style="{ transform: isEnglish ? 'translateX(20px)' : 'translateX(0)' }"
+                ></span>
+              </span>
+              <span class="text-xs font-semibold tracking-wide" :class="isEnglish ? 'text-blue-600' : 'text-gray-500'">{{ t('header.switch.en') }}</span>
+            </button>
+          </div>
         </div>
       </transition>
     </div>
@@ -77,10 +99,26 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
+import { useI18n } from '../composables/useI18n'
 
 const mobileMenuOpen = ref(false)
 const scrolled = ref(false)
+const { t, locale, setLocale } = useI18n()
+
+const navItems = computed(() => [
+  { href: '#', label: t('header.nav.home') },
+  { href: '#directions', label: t('header.nav.directions') },
+  { href: '#about', label: t('header.nav.about') },
+  { href: '#services', label: t('header.nav.services') },
+  { href: '#contacts', label: t('header.nav.contacts') }
+])
+
+const isEnglish = computed(() => locale.value === 'en')
+
+const toggleLocale = () => {
+  setLocale(isEnglish.value ? 'ru' : 'en')
+}
 
 const handleScroll = () => {
   scrolled.value = window.scrollY > 50

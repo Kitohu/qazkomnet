@@ -2,10 +2,10 @@
   <section id="directions" class="py-20 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-bold text-center text-gray-900 mb-4">
-        Основные направления
+        {{ t('expertise.title') }}
       </h2>
       <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-        Мы предлагаем широкий спектр IT-услуг для развития вашего бизнеса
+        {{ t('expertise.description') }}
       </p>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -26,38 +26,19 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { Server, Code, Shield, Cloud, Database, Network } from 'lucide-vue-next'
+import { useI18n } from '../composables/useI18n'
 
-const directions = [
-  {
-    title: 'Системная интеграция',
-    description: 'Объединение различных IT-систем в единую инфраструктуру для эффективной работы',
-    icon: Server
-  },
-  {
-    title: 'Разработка ПО',
-    description: 'Создание индивидуальных программных решений под задачи вашего бизнеса',
-    icon: Code
-  },
-  {
-    title: 'Информационная безопасность',
-    description: 'Защита данных и IT-инфраструктуры от внешних и внутренних угроз',
-    icon: Shield
-  },
-  {
-    title: 'Облачные решения',
-    description: 'Миграция и управление облачной инфраструктурой для масштабирования бизнеса',
-    icon: Cloud
-  },
-  {
-    title: 'Управление данными',
-    description: 'Организация хранения, обработки и анализа больших объемов данных',
-    icon: Database
-  },
-  {
-    title: 'Сетевая инфраструктура',
-    description: 'Проектирование и внедрение надежных сетевых решений',
-    icon: Network
-  }
-]
+const icons = [Server, Code, Shield, Cloud, Database, Network]
+const { t } = useI18n()
+
+const directions = computed(() => {
+  const cards = t('expertise.cards')
+
+  return cards.map((card, index) => ({
+    ...card,
+    icon: icons[index] || Server
+  }))
+})
 </script>

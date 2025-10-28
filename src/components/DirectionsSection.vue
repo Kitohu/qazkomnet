@@ -15,21 +15,21 @@
         <div data-aos="fade-up" data-aos-duration="800">
           <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
             <span class="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent animate-gradient">
-              Интегратор
+              {{ t('directions.hero.line1') }}
             </span>
             <br />
-            <span data-aos="fade-up" data-aos-delay="200">IT-решений</span>
+            <span data-aos="fade-up" data-aos-delay="200">{{ t('directions.hero.line2') }}</span>
           </h1>
           <p class="text-xl text-gray-600 mb-8" data-aos="fade-up" data-aos-delay="300">
-            Комплексные решения для цифровой трансформации вашего бизнеса
+            {{ t('directions.hero.description') }}
           </p>
           <a href="https://wa.me/77076100951" target="_blank" rel="noopener noreferrer"
              class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg text-lg font-semibold btn-animated hover-glow shadow-lg transform transition-all duration-300 hover:scale-105 group"
              data-aos="fade-up"
              data-aos-delay="400"
-             aria-label="Оставить заявку в WhatsApp">
+             :aria-label="t('directions.hero.ctaAria')">
             <span class="flex items-center">
-              Оставить заявку
+              {{ t('directions.hero.cta') }}
               <svg class="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -51,4 +51,7 @@
 
 <script setup>
 import ParticleSystem from './ParticleSystem.vue'
+import { useI18n } from '../composables/useI18n'
+
+const { t } = useI18n()
 </script>

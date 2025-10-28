@@ -11,7 +11,7 @@
       v-if="showButton"
       @click="scrollToTop"
       class="scroll-to-top ripple"
-      aria-label="Scroll to top">
+      :aria-label="t('scrollToTop.aria')">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
       </svg>
@@ -21,8 +21,10 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useI18n } from '../composables/useI18n'
 
 const showButton = ref(false)
+const { t } = useI18n()
 
 const handleScroll = () => {
   showButton.value = window.scrollY > 300

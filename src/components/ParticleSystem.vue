@@ -7,12 +7,18 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
+const MAX_PARTICLES = 180
+
 const containerRef = ref(null)
 const canvasRef = ref(null)
 
 let animationId = null
 let particles = []
 let mouse = { x: 0, y: 0 }
+let globalHue = 220
+let lastSpawnTime = Number.NEGATIVE_INFINITY
+let lastMouseSpawn = 0
+let lastFrameTime = 0
 
 class Particle {
   constructor(x, y) {
@@ -24,6 +30,7 @@ class Particle {
     this.opacity = Math.random() * 0.5 + 0.5
     this.life = 1
     this.decay = Math.random() * 0.01 + 0.005
+    this.hueOffset = Math.random() * 40 - 20
   }
 
   update() {
@@ -50,21 +57,32 @@ class Particle {
     ctx.globalAlpha = this.opacity
     ctx.beginPath()
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-    ctx.fillStyle = `hsl(${220 + Math.sin(Date.now() * 0.001) * 60}, 70%, 60%)`
+    ctx.fillStyle = `hsl(${globalHue + this.hueOffset}, 70%, 60%)`
     ctx.fill()
     ctx.restore()
   }
 }
 
 const createParticle = (x, y) => {
+  if (particles.length >= MAX_PARTICLES) {
+    particles.splice(0, particles.length - MAX_PARTICLES + 1)
+  }
+
   particles.push(new Particle(x, y))
 }
 
-const animate = () => {
+const animate = (timestamp) => {
   const canvas = canvasRef.value
   const ctx = canvas.getContext('2d')
   
   ctx.clearRect(0, 0, canvas.width, canvas.height)
+  if (!lastFrameTime) {
+    lastFrameTime = timestamp
+  }
+
+  const delta = timestamp - lastFrameTime
+  lastFrameTime = timestamp
+  globalHue = (globalHue + delta * 0.05) % 360
   
   // Обновляем и рисуем частицы
   particles = particles.filter(particle => {
@@ -74,11 +92,12 @@ const animate = () => {
   })
   
   // Создаем новые частицы случайно
-  if (Math.random() < 0.1) {
+  if (timestamp - lastSpawnTime > 150) {
     createParticle(
       Math.random() * canvas.width,
       Math.random() * canvas.height
     )
+    lastSpawnTime = timestamp
   }
   
   animationId = requestAnimationFrame(animate)
@@ -90,8 +109,10 @@ const handleMouseMove = (event) => {
   mouse.y = event.clientY - rect.top
   
   // Создаем частицы при движении мыши
-  if (Math.random() < 0.3) {
+  const now = performance.now()
+  if (now - lastMouseSpawn > 60) {
     createParticle(mouse.x, mouse.y)
+    lastMouseSpawn = now
   }
 }
 
@@ -120,7 +141,7 @@ onMounted(() => {
   }
   
   // Запускаем анимацию
-  animate()
+  animationId = requestAnimationFrame(animate)
   
   // Обработчики событий
   canvas.addEventListener('mousemove', handleMouseMove)
@@ -137,6 +158,7 @@ onUnmounted(() => {
   }
   
   window.removeEventListener('resize', handleResize)
+  particles = []
 })
 </script>
 

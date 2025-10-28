@@ -15,13 +15,17 @@
         </div>
         <div data-aos="fade-left" data-aos-duration="800">
           <h2 class="text-4xl font-bold text-gray-900 mb-6" data-aos="fade-up" data-aos-delay="200">
-            О компании
+            {{ t('about.title') }}
           </h2>
-          <p class="text-lg text-gray-600 mb-6 leading-relaxed" data-aos="fade-up" data-aos-delay="300">
-            QAZKOMNET — ведущий интегратор IT-решений в Казахстане. Мы специализируемся на комплексной цифровой трансформации бизнеса, предоставляя инновационные технологические решения.
-          </p>
-          <p class="text-lg text-gray-600 mb-8 leading-relaxed" data-aos="fade-up" data-aos-delay="400">
-            Наша команда профессионалов обладает глубокими знаниями и многолетним опытом в области информационных технологий.
+          <p
+            v-for="(paragraph, index) in paragraphs"
+            :key="paragraph"
+            :data-aos-delay="300 + index * 100"
+            class="text-lg text-gray-600 leading-relaxed"
+            :class="index === paragraphs.length - 1 ? 'mb-8' : 'mb-6'"
+            data-aos="fade-up"
+          >
+            {{ paragraph }}
           </p>
 
           <div class="grid grid-cols-3 gap-6">
@@ -29,19 +33,19 @@
                  data-aos="zoom-in" 
                  data-aos-delay="500">
               <div class="text-4xl font-bold text-blue-600 mb-2">{{ animatedProjects }}+</div>
-              <div class="text-gray-600">Проектов</div>
+              <div class="text-gray-600">{{ statsLabels.projects }}</div>
             </div>
             <div class="text-center card-hover bg-white p-4 rounded-xl shadow-lg" 
                  data-aos="zoom-in" 
                  data-aos-delay="600">
               <div class="text-4xl font-bold text-blue-600 mb-2">{{ animatedClients }}+</div>
-              <div class="text-gray-600">Клиентов</div>
+              <div class="text-gray-600">{{ statsLabels.clients }}</div>
             </div>
             <div class="text-center card-hover bg-white p-4 rounded-xl shadow-lg" 
                  data-aos="zoom-in" 
                  data-aos-delay="700">
               <div class="text-4xl font-bold text-blue-600 mb-2">{{ animatedYears }}+</div>
-              <div class="text-gray-600">Лет опыта</div>
+              <div class="text-gray-600">{{ statsLabels.years }}</div>
             </div>
           </div>
         </div>
@@ -51,8 +55,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
+import { useI18n } from '../composables/useI18n'
 
 const animatedProjects = ref(0)
 const animatedClients = ref(0)
@@ -60,6 +65,9 @@ const animatedYears = ref(0)
 
 const sectionRef = ref(null)
 const hasAnimated = ref(false)
+const { t } = useI18n()
+const paragraphs = computed(() => t('about.paragraphs'))
+const statsLabels = computed(() => t('about.stats'))
 
 const animateCounter = (target, current, duration = 2000) => {
   const startTime = Date.now()

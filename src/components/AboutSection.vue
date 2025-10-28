@@ -1,4 +1,18 @@
- <template>
+<script setup>
+import { computed } from 'vue'
+import { useI18n } from '../composables/useI18n'
+
+const { t } = useI18n()
+const companyLinks = computed(() => t('contacts.companyLinks'))
+const servicesLinks = computed(() => t('contacts.servicesLinks'))
+const contactInfo = computed(() => ({
+  address: t('contacts.address'),
+  phone: t('contacts.phone'),
+  email: t('contacts.email')
+}))
+const bottomLinks = computed(() => t('contacts.bottom'))
+</script>
+<template>
   <footer id="contacts" class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-12 relative overflow-hidden">
     <!-- Анимированный фон -->
     <div class="absolute inset-0">
@@ -14,7 +28,7 @@
             <img src="/qazkomnet_nobg_2.png" alt="QAZKOMNET" class="h-8 md:h-10 w-auto drop-shadow-lg select-none" />
           </div>
           <p class="text-gray-400 leading-relaxed">
-            Интегратор IT-решений для цифровой трансформации бизнеса
+            {{ t('contacts.tagline') }}
           </p>
           
           <!-- Социальные сети -->
@@ -38,46 +52,50 @@
         </div>
 
         <div data-aos="fade-up" data-aos-delay="200">
-          <h3 class="text-lg font-semibold mb-4 text-white">Компания</h3>
+          <h3 class="text-lg font-semibold mb-4 text-white">{{ t('contacts.companyTitle') }}</h3>
           <ul class="space-y-3">
-            <li><a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:translate-x-2 hover:text-blue-400 block">О нас</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:translate-x-2 hover:text-blue-400 block">Команда</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:translate-x-2 hover:text-blue-400 block">Карьера</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:translate-x-2 hover:text-blue-400 block">Новости</a></li>
+            <li
+              v-for="link in companyLinks"
+              :key="link"
+            >
+              <a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:translate-x-2 hover:text-blue-400 block">{{ link }}</a>
+            </li>
           </ul>
         </div>
 
         <div data-aos="fade-up" data-aos-delay="300">
-          <h3 class="text-lg font-semibold mb-4 text-white">Услуги</h3>
+          <h3 class="text-lg font-semibold mb-4 text-white">{{ t('contacts.servicesTitle') }}</h3>
           <ul class="space-y-3">
-            <li><a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:translate-x-2 hover:text-blue-400 block">Интеграция</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:translate-x-2 hover:text-blue-400 block">Разработка</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:translate-x-2 hover:text-blue-400 block">Поддержка</a></li>
-            <li><a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:translate-x-2 hover:text-blue-400 block">Консалтинг</a></li>
+            <li
+              v-for="link in servicesLinks"
+              :key="link"
+            >
+              <a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:translate-x-2 hover:text-blue-400 block">{{ link }}</a>
+            </li>
           </ul>
         </div>
 
         <div data-aos="fade-up" data-aos-delay="400">
-          <h3 class="text-lg font-semibold mb-4 text-white">Контакты</h3>
+          <h3 class="text-lg font-semibold mb-4 text-white">{{ t('contacts.contactsTitle') }}</h3>
           <ul class="space-y-3 text-gray-400">
             <li class="flex items-center hover:text-white transition-colors duration-300">
               <svg class="w-5 h-5 mr-2 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
               </svg>
-              г. Алматы, Казахстан
+              {{ contactInfo.address }}
             </li>
             <li class="flex items-center hover:text-white transition-colors duration-300">
               <svg class="w-5 h-5 mr-2 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
               </svg>
-              +7 (727) 123-45-67
+              {{ contactInfo.phone }}
             </li>
             <li class="flex items-center hover:text-white transition-colors duration-300">
               <svg class="w-5 h-5 mr-2 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
               </svg>
-              info@qazkomnet.kz
+              {{ contactInfo.email }}
             </li>
           </ul>
         </div>
@@ -85,12 +103,10 @@
 
       <div class="border-t border-gray-700 pt-8 text-center" data-aos="fade-up" data-aos-delay="500">
         <div class="flex flex-col md:flex-row justify-between items-center">
-          <p class="text-gray-400 mb-4 md:mb-0">
-            &copy; 2025 QAZKOMNET. Все права защищены.
-          </p>
+          <p class="text-gray-400 mb-4 md:mb-0" v-html="bottomLinks.rights"></p>
           <div class="flex space-x-6 text-gray-400">
-            <a href="#" class="hover:text-white transition-colors duration-300">Политика конфиденциальности</a>
-            <a href="#" class="hover:text-white transition-colors duration-300">Условия использования</a>
+            <a href="#" class="hover:text-white transition-colors duration-300">{{ bottomLinks.privacy }}</a>
+            <a href="#" class="hover:text-white transition-colors duration-300">{{ bottomLinks.terms }}</a>
           </div>
         </div>
       </div>

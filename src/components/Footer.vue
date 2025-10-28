@@ -11,13 +11,11 @@
 </template>
 
 <script setup>
-const texts = [
-  'ИННОВАЦИИ',
-  'ТЕХНОЛОГИИ',
-  'РАЗВИТИЕ',
-  'БЕЗОПАСНОСТЬ',
-  'ЭФФЕКТИВНОСТЬ'
-]
+import { computed } from 'vue'
+import { useI18n } from '../composables/useI18n'
+
+const { t } = useI18n()
+const texts = computed(() => t('footerTicker.texts'))
 </script>
 
 <style scoped>

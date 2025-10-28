@@ -2,7 +2,7 @@
   <section class="py-12 bg-white border-y relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-8" data-aos="fade-up">
-        <h2 class="text-2xl font-semibold text-gray-700 mb-4">Нам доверяют</h2>
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4">{{ t('hero.title') }}</h2>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12">
         <div v-for="(partner, index) in partners" 
@@ -20,6 +20,10 @@
 </template>
 
 <script setup>
+import { useI18n } from '../composables/useI18n'
+
+const { t } = useI18n()
+
 const partners = [
   {
     src: '/EFLgrjH8x89Q6VxGNZmLtZ7Y3Dy46H76-partners-cmggwkq.png',
