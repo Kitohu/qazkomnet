@@ -15,11 +15,14 @@
           <HeroSection />
           <ScrollingBanner />
           <DirectionsSection />
-          <AboutSection />
+         
           <ServicesSection />
           <PartnersSection />
+          <ContactsSection />
+          <Footer />
+          
         </main>
-        <Footer />
+         <AboutSection />
         
         <!-- Кнопка "наверх" -->
         <ScrollToTop />
@@ -38,6 +41,7 @@ import DirectionsSection from './components/DirectionsSection.vue'
 import AboutSection from './components/AboutSection.vue'
 import ServicesSection from './components/ServicesSection.vue'
 import PartnersSection from './components/PartnersSection.vue'
+import ContactsSection from './components/ContactsSection.vue'
 import Footer from './components/Footer.vue'
 import ScrollToTop from './components/ScrollToTop.vue'
 import { createI18n, provideI18n } from './composables/useI18n'
