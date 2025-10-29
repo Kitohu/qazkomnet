@@ -7,7 +7,13 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const MAX_PARTICLES = 180
+const props = defineProps({
+  disabled: { type: Boolean, default: false },
+  maxParticles: { type: Number, default: null },
+  mouse: { type: Boolean, default: true }
+})
+
+let MAX_PARTICLES = 30
 
 const containerRef = ref(null)
 const canvasRef = ref(null)
@@ -19,6 +25,8 @@ let globalHue = 220
 let lastSpawnTime = Number.NEGATIVE_INFINITY
 let lastMouseSpawn = 0
 let lastFrameTime = 0
+let skipCounter = 0
+let lowPerf = false
 
 class Particle {
   constructor(x, y) {
@@ -82,7 +90,16 @@ const animate = (timestamp) => {
 
   const delta = timestamp - lastFrameTime
   lastFrameTime = timestamp
-  globalHue = (globalHue + delta * 0.05) % 360
+  globalHue = (globalHue + delta * (lowPerf ? 0.03 : 0.05)) % 360
+  
+  // Пропуск кадров на слабых устройствах (примерно до ~30fps)
+  if (lowPerf) {
+    skipCounter = (skipCounter + 1) % 2
+    if (skipCounter !== 0) {
+      animationId = requestAnimationFrame(animate)
+      return
+    }
+  }
   
   // Обновляем и рисуем частицы
   particles = particles.filter(particle => {
@@ -92,7 +109,8 @@ const animate = (timestamp) => {
   })
   
   // Создаем новые частицы случайно
-  if (timestamp - lastSpawnTime > 150) {
+  const spawnDelay = lowPerf ? 280 : 150
+  if (timestamp - lastSpawnTime > spawnDelay) {
     createParticle(
       Math.random() * canvas.width,
       Math.random() * canvas.height
@@ -110,7 +128,7 @@ const handleMouseMove = (event) => {
   
   // Создаем частицы при движении мыши
   const now = performance.now()
-  if (now - lastMouseSpawn > 60) {
+  if (!lowPerf && now - lastMouseSpawn > 60) {
     createParticle(mouse.x, mouse.y)
     lastMouseSpawn = now
   }
@@ -132,8 +150,25 @@ onMounted(() => {
   canvas.width = container.offsetWidth
   canvas.height = container.offsetHeight
   
+  // Определяем режим производительности
+  lowPerf = document.documentElement.classList.contains('perf-low') ||
+            (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+  if (props.maxParticles !== null) {
+    MAX_PARTICLES = Math.max(0, props.maxParticles)
+  } else {
+    if (lowPerf) {
+      MAX_PARTICLES = 40
+    } else {
+      MAX_PARTICLES = 120
+    }
+  }
+  
+  if (props.disabled || MAX_PARTICLES === 0) {
+    return
+  }
+  
   // Создаем начальные частицы
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < (lowPerf ? 8 : 20); i++) {
     createParticle(
       Math.random() * canvas.width,
       Math.random() * canvas.height
@@ -144,7 +179,9 @@ onMounted(() => {
   animationId = requestAnimationFrame(animate)
   
   // Обработчики событий
-  canvas.addEventListener('mousemove', handleMouseMove)
+  if (!lowPerf && props.mouse) {
+    canvas.addEventListener('mousemove', handleMouseMove)
+  }
   window.addEventListener('resize', handleResize)
 })
 

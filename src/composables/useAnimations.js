@@ -4,30 +4,52 @@ export function useParallax(speed = 0.5) {
   const elementRef = ref(null)
   const offset = ref(0)
 
-  const updateParallax = () => {
-    if (elementRef.value) {
-      const rect = elementRef.value.getBoundingClientRect()
-      const scrolled = window.pageYOffset
-      const elementTop = rect.top + scrolled
-      const elementHeight = rect.height
-      const windowHeight = window.innerHeight
+  let ticking = false
+  let cached = { top: 0, height: 0 }
 
-      // Вычисляем позицию элемента относительно viewport
-      const elementCenter = elementTop + elementHeight / 2
-      const scrollCenter = scrolled + windowHeight / 2
-      
-      // Рассчитываем offset для параллакса
-      offset.value = (scrollCenter - elementCenter) * speed
+  const isPerfLow = () =>
+    typeof document !== 'undefined' && document.documentElement.classList.contains('perf-low')
+
+  const measure = () => {
+    if (!elementRef.value) return
+    const rect = elementRef.value.getBoundingClientRect()
+    const scrolled = window.pageYOffset
+    cached.top = rect.top + scrolled
+    cached.height = rect.height
+  }
+
+  const updateParallax = () => {
+    if (!elementRef.value) return
+    if (isPerfLow()) return // отключаем на слабых
+
+    if (!ticking) {
+      ticking = true
+      requestAnimationFrame(() => {
+        const scrolled = window.pageYOffset
+        const windowHeight = window.innerHeight
+        const elementCenter = cached.top + cached.height / 2
+        const scrollCenter = scrolled + windowHeight / 2
+        offset.value = (scrollCenter - elementCenter) * speed
+        ticking = false
+      })
     }
   }
 
+  const handleResize = () => {
+    measure()
+    updateParallax()
+  }
+
   onMounted(() => {
+    measure()
     window.addEventListener('scroll', updateParallax, { passive: true })
-    updateParallax() // Инициализация
+    window.addEventListener('resize', handleResize)
+    updateParallax()
   })
 
   onUnmounted(() => {
     window.removeEventListener('scroll', updateParallax)
+    window.removeEventListener('resize', handleResize)
   })
 
   return {
@@ -73,13 +95,23 @@ export function useScrollDirection() {
 export function useMouseParallax(intensity = 50) {
   const mouseX = ref(0)
   const mouseY = ref(0)
+  let ticking = false
+
+  const isPerfLow = () =>
+    typeof document !== 'undefined' && document.documentElement.classList.contains('perf-low')
   
   const handleMouseMove = (event) => {
-    const { clientX, clientY } = event
-    const { innerWidth, innerHeight } = window
-    
-    mouseX.value = (clientX / innerWidth - 0.5) * intensity
-    mouseY.value = (clientY / innerHeight - 0.5) * intensity
+    if (isPerfLow()) return
+    if (!ticking) {
+      ticking = true
+      requestAnimationFrame(() => {
+        const { clientX, clientY } = event
+        const { innerWidth, innerHeight } = window
+        mouseX.value = (clientX / innerWidth - 0.5) * intensity
+        mouseY.value = (clientY / innerHeight - 0.5) * intensity
+        ticking = false
+      })
+    }
   }
 
   onMounted(() => {

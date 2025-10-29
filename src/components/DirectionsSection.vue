@@ -1,13 +1,18 @@
 <template>
   <section id="directions" class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 py-20 relative overflow-hidden">
     <!-- Система частиц -->
-    <ParticleSystem class="absolute inset-0 opacity-30" />
+    <ParticleSystem
+      v-if="showParticles"
+      class="absolute inset-0 opacity-20"
+      :max-particles="36"
+      :mouse="false"
+    />
     
     <!-- Фоновые анимированные элементы -->
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
-      <div class="absolute top-20 left-10 w-20 h-20 bg-blue-200 rounded-full opacity-20 animate-float"></div>
-      <div class="absolute bottom-20 right-10 w-32 h-32 bg-purple-200 rounded-full opacity-20 animate-float" style="animation-delay: 1s;"></div>
-      <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-indigo-200 rounded-full opacity-20 animate-float" style="animation-delay: 2s;"></div>
+  <div class="absolute top-20 left-10 w-20 h-20 bg-blue-200 rounded-full opacity-20 animate-float" style="animation-duration:6s;"></div>
+  <div class="absolute bottom-20 right-10 w-32 h-32 bg-purple-200 rounded-full opacity-20 animate-float" style="animation-delay: 1s; animation-duration:6s;"></div>
+  <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-indigo-200 rounded-full opacity-20 animate-float" style="animation-delay: 2s; animation-duration:6s;"></div>
     </div>
     
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -23,7 +28,7 @@
           <p class="text-xl text-gray-600 mb-8" data-aos="fade-up" data-aos-delay="300">
             {{ t('directions.hero.description') }}
           </p>
-          <a href="https://wa.me/77076100951" target="_blank" rel="noopener noreferrer"
+          <a :href="waLink" target="_blank" rel="noopener noreferrer"
              class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg text-lg font-semibold btn-animated hover-glow shadow-lg transform transition-all duration-300 hover:scale-105 group"
              data-aos="fade-up"
              data-aos-delay="400"
@@ -37,11 +42,18 @@
           </a>
         </div>
         <div class="flex justify-center" data-aos="fade-left" data-aos-delay="200">
-          <div class="w-full max-w-md">
-            <img src="/about-us_1_d4eqdc.svg" 
-                 alt="IT Solutions" 
-                 class="w-full h-auto animate-float server-image no-background" 
-                 style="animation-duration: 4s;" />
+          <div class="w-full max-w-md relative">
+            <!-- Плавающее изображение с легкой тенью и отключением на мобильных -->
+            <img
+              src="/server_PNG43.png"
+              alt="IT Solutions"
+              class="server-image no-background gpu-float float-disable-sm"
+              style="--float-amp: 12px; animation-duration: 6s;"
+              loading="lazy"
+              decoding="async"
+            />
+            <!-- Статическая подложка-тень под изображением -->
+            <div class="img-under-shadow"></div>
           </div>
         </div>
       </div>
@@ -51,7 +63,25 @@
 
 <script setup>
 import ParticleSystem from './ParticleSystem.vue'
+import { computed, onMounted, ref } from 'vue'
 import { useI18n } from '../composables/useI18n'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
+
+// Ссылка на WhatsApp с заранее заполненным текстом (локализовано)
+const waLink = computed(() => {
+  const msg = locale.value === 'en'
+    ? 'Hello! I would like a consultation.'
+    : 'Здравствуйте! Хочу получить консультацию.'
+
+  return `https://wa.me/77076100951?text=${encodeURIComponent(msg)}`
+})
+
+// Отрисовывать частицы только на десктопах и не в perf-low
+const showParticles = ref(false)
+onMounted(() => {
+  const perfLow = document.documentElement.classList.contains('perf-low')
+  const isMobile = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(max-width: 768px)').matches
+  showParticles.value = !perfLow && !isMobile
+})
 </script>

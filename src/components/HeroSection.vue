@@ -10,9 +10,10 @@
              class="transition-all duration-500 opacity-70 hover:opacity-100"
              :data-aos="'fade-up'"
              :data-aos-delay="index * 100">
-          <img :src="partner.src" 
-               :alt="partner.alt" 
-               class="h-12 w-auto partner-logo" />
+    <img :src="partner.src" 
+      :alt="partner.alt" 
+      class="h-12 w-auto partner-logo"
+      loading="lazy" decoding="async" />
         </div>
       </div>
     </div>

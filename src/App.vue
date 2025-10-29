@@ -60,6 +60,26 @@ onMounted(() => {
       i18n.setLocale(savedLocale)
     }
   }
+
+  // На слабых устройствах/при reduced motion пропускаем LoadingScreen
+  if (typeof document !== 'undefined') {
+    const reduced = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const perfLow = document.documentElement.classList.contains('perf-low') || reduced
+    if (perfLow) {
+      appLoaded.value = true
+    }
+
+    // Если не perf-low — форсим eager-загрузку картинок, где стоит lazy
+    if (!perfLow) {
+      queueMicrotask?.(() => {
+        try {
+          document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
+            img.setAttribute('loading', 'eager')
+          })
+        } catch {}
+      })
+    }
+  }
 })
 
 watch(

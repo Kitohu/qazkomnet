@@ -8,10 +8,11 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div data-aos="fade-right" data-aos-duration="800" class="parallax">
+        <div data-aos="fade-right" data-aos-duration="800">
           <img src="/hero_image_jdl6ff.svg" 
                alt="О компании" 
-               class="server-image transform rotate-1 hover:rotate-0 no-background" />
+               class="server-image no-background"
+               loading="lazy" decoding="async" />
         </div>
         <div data-aos="fade-left" data-aos-duration="800">
           <h2 class="text-4xl font-bold text-gray-900 mb-6" data-aos="fade-up" data-aos-delay="200">
@@ -29,22 +30,22 @@
           </p>
 
           <div class="grid grid-cols-3 gap-6">
-            <div class="text-center card-hover bg-white p-4 rounded-xl shadow-lg" 
+            <div class="text-center md:text-left card-hover bg-white p-4 rounded-xl shadow-lg" 
                  data-aos="zoom-in" 
                  data-aos-delay="500">
-              <div class="text-4xl font-bold text-blue-600 mb-2">{{ animatedProjects }}+</div>
+              <div class="text-3xl md:text-4xl leading-none tracking-tight font-bold text-blue-600 mb-2">{{ animatedProjects }}+</div>
               <div class="text-gray-600">{{ statsLabels.projects }}</div>
             </div>
-            <div class="text-center card-hover bg-white p-4 rounded-xl shadow-lg" 
+            <div class="text-center md:text-left card-hover bg-white p-4 rounded-xl shadow-lg" 
                  data-aos="zoom-in" 
                  data-aos-delay="600">
-              <div class="text-4xl font-bold text-blue-600 mb-2">{{ animatedClients }}+</div>
+              <div class="text-3xl md:text-4xl leading-none tracking-tight font-bold text-blue-600 mb-2">{{ animatedClients }}+</div>
               <div class="text-gray-600">{{ statsLabels.clients }}</div>
             </div>
-            <div class="text-center card-hover bg-white p-4 rounded-xl shadow-lg" 
+            <div class="text-center md:text-left card-hover bg-white p-4 rounded-xl shadow-lg" 
                  data-aos="zoom-in" 
                  data-aos-delay="700">
-              <div class="text-4xl font-bold text-blue-600 mb-2">{{ animatedYears }}+</div>
+              <div class="text-3xl md:text-4xl leading-none tracking-tight font-bold text-blue-600 mb-2">{{ animatedYears }}+</div>
               <div class="text-gray-600">{{ statsLabels.years }}</div>
             </div>
           </div>

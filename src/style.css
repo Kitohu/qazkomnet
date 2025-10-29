@@ -12,6 +12,29 @@
   }
 }
 
+/* GPU-дружественная плавающая анимация с регулируемой амплитудой */
+@keyframes float-3d {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, var(--float-amp, 12px), 0);
+  }
+}
+
+.gpu-float {
+  will-change: transform;
+  animation: float-3d 4s ease-in-out infinite;
+}
+
+/* Отключить плавающую анимацию на мобильных */
+@media (max-width: 768px) {
+  .float-disable-sm {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
 @keyframes pulse-glow {
   0%, 100% {
     box-shadow: 0 0 0 rgba(59, 130, 246, 0.3);
@@ -90,7 +113,7 @@
 
 /* Параллакс эффект */
 .parallax {
-  will-change: transform;
+  will-change: auto;
 }
 
 /* Стикеры и карточки */
@@ -121,6 +144,46 @@
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+/* Экономия отрисовки невидимых секций */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
+}
+
+/* Глобальное снижение эффектов для слабых устройств и reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.perf-low * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition: none !important;
+}
+
+.perf-low .partner-logo,
+.perf-low .server-image {
+  filter: none !important;
+  transform: none !important;
+}
+
+.perf-low .animate-gradient,
+.perf-low .animate-float,
+.perf-low .animate-pulse-glow,
+.perf-low .text-shimmer {
+  animation: none !important;
+}
+
+/* Ускоряем AOS и убираем задержки глобально */
+[data-aos] {
+  transition-duration: 500ms !important;
+  transition-delay: 0ms !important;
 }
 
 /* Кнопка "наверх" */
@@ -248,4 +311,23 @@ html {
   background: transparent !important;
   box-shadow: none !important;
   border-radius: 0 !important;
+}
+
+/* Облегчённая тень для тяжёлых секций */
+.light-shadow {
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.14)) !important;
+}
+
+/* Статическая тень-подложка под изображением */
+.img-under-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: 0.25rem; /* ~4px */
+  transform: translateX(-50%);
+  width: min(80%, 280px);
+  height: 22px;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgba(0,0,0,0.22), rgba(0,0,0,0.06) 60%, rgba(0,0,0,0) 70%);
+  filter: blur(6px);
+  opacity: 0.85;
 }

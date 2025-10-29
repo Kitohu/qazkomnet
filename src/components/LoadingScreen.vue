@@ -105,25 +105,40 @@ const currentMessage = computed(() => {
 })
 
 onMounted(() => {
-  // Симуляция загрузки с анимированным прогрессом
+  const reduced = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const perfLow = typeof document !== 'undefined' && document.documentElement.classList.contains('perf-low')
+
+  if (reduced || perfLow) {
+    // На слабых — сразу скрываем загрузчик после крошечной задержки, без симуляции
+    progress.value = 100
+    setTimeout(() => {
+      isLoading.value = false
+      emit('loaded')
+    }, 80)
+    return
+  }
+
+  // Быстрая симуляция загрузки без длинных задержек (~0.6–0.9с)
   const interval = setInterval(() => {
-    progress.value += Math.random() * 10 + 4
-    
+    progress.value += 20 + Math.random() * 10
+
     if (progress.value >= 100) {
       progress.value = 100
       clearInterval(interval)
-      
-      // Задержка перед скрытием загрузки
       setTimeout(() => {
         isLoading.value = false
         emit('loaded')
-      }, 500)
+      }, 100)
     }
-  }, 200)
+  }, 120)
 })
 </script>
 
 <style scoped>
+.perf-low .loading-screen .bg-elements,
+.perf-low .loading-screen .logo-aura {
+  display: none !important;
+}
 .loading-screen {
   position: fixed;
   top: 0;

@@ -5,7 +5,7 @@
   <div class="flex items-center justify-between h-24">
         <!-- Logo -->
         <a href="#" class="flex items-center" data-aos="fade-right">
-          <img src="/qazkomnet_nobg_2.png" alt="QAZKOMNET" class="h-[72px] w-auto drop-shadow-lg select-none" />
+          <img src="/qazkomnet_nobg_2.png" alt="QAZKOMNET" class="h-[72px] w-auto drop-shadow-lg select-none" decoding="async" fetchpriority="high" />
         </a>
 
         <!-- Desktop Navigation -->
