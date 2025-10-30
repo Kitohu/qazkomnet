@@ -2,7 +2,7 @@
   <section id="partners" class="py-8 sm:py-10 md:py-12 bg-white border-y relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-6 sm:mb-8" data-aos="fade-up">
-        <h2 class="text-xl sm:text-2xl font-semibold text-gray-700 mb-3 sm:mb-4 px-4">{{ t('hero.title') }}</h2>
+        <h2 class="text-xl sm:text-2xl font-semibold text-gray-700 mb-3 sm:mb-4 px-4">{{ t('partners.title') }}</h2>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-12">
         <div
