@@ -89,8 +89,8 @@
             </div>
             
             <!-- Интерактивная карта -->
-            <div class="relative group cursor-pointer" @click="openInMaps">
-              <div class="aspect-[4/3] bg-gradient-to-br from-blue-50 to-blue-100 relative overflow-hidden">
+            <div class="relative cursor-pointer touch-manipulation" @click="openInMaps">
+              <div class="aspect-[4/3] bg-gradient-to-br from-blue-50 to-blue-100 relative overflow-hidden rounded-b-2xl">
                 <!-- Встраиваемая карта OpenStreetMap -->
                 <iframe
                   width="100%"
@@ -101,15 +101,20 @@
                   marginwidth="0"
                   src="https://www.openstreetmap.org/export/embed.html?bbox=71.33089900%2C51.19483900%2C71.34089900%2C51.20283900&layer=mapnik&marker=51.198839%2C71.335899"
                   style="border: 0; pointer-events: none;"
-                  class="transition-transform duration-300 group-hover:scale-105"
+                  class="w-full h-full"
                 ></iframe>
                 
-                <!-- Оверлей при наведении -->
-                <div class="absolute inset-0 bg-blue-900 bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center pointer-events-none">
-                  <div class="bg-white rounded-full p-4 transform scale-0 group-hover:scale-100 transition-transform duration-300 shadow-2xl">
+                <!-- Кликабельный оверлей -->
+                <div class="absolute inset-0 z-10 flex items-center justify-center group">
+                  <!-- Визуальная подсказка -->
+                  <div class="bg-white/90 backdrop-blur-sm rounded-full p-4 shadow-2xl transition-all duration-300 group-hover:scale-110 group-active:scale-95">
                     <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                     </svg>
+                  </div>
+                  <!-- Текстовая подсказка на мобильных -->
+                  <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg md:hidden whitespace-nowrap">
+                    {{ currentLocale === 'ru' ? 'Нажмите для открытия' : 'Tap to open' }}
                   </div>
                 </div>
               </div>
