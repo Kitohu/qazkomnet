@@ -106,11 +106,9 @@
                   scrolling="no"
                   marginheight="0"
                   marginwidth="0"
-                  zoom="15"
-                  src="https://www.openstreetmap.org/export/embed.html?bbox=71.33089900%2C51.19483900%2C71.34089900%2C51.20283900&layer=mapnik&marker=51.198839%2C71.335899"
+                  src="https://www.openstreetmap.org/export/embed.html?bbox=71.32989%2C51.19383%2C71.34189%2C51.20383&layer=mapnik&marker=51.198839%2C71.335899"
                   style="border: 0; pointer-events: none;"
                   class="w-full h-full absolute inset-0"
-                  
                 ></iframe>
                 
                 
