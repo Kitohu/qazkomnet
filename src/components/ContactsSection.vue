@@ -113,50 +113,6 @@
                   </div>
                 </div>
               </div>
-
-              <!-- Кнопка открытия в картах -->
-              <div class="p-6 bg-gradient-to-br from-gray-50 to-white">
-                <button 
-                  class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center justify-center space-x-3"
-                  @click.stop="openInMaps"
-                >
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
-                  </svg>
-                  <span>{{ t('contacts.openMap') }}</span>
-                </button>
-                
-                <!-- Альтернативные карты -->
-                <div class="mt-4 flex gap-3">
-                  <a 
-                    href="https://2gis.kz/astana/geo/9570784863338074?m=71.335899%2C51.198839%2F19.36"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="flex-1 bg-white border-2 border-gray-200 hover:border-blue-600 text-gray-700 hover:text-blue-600 font-medium py-3 px-4 rounded-lg transition-all duration-300 text-center text-sm"
-                    @click.stop
-                  >
-                    2GIS
-                  </a>
-                  <a 
-                    href="https://www.google.com/maps/search/?api=1&query=51.198839,71.335899"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="flex-1 bg-white border-2 border-gray-200 hover:border-blue-600 text-gray-700 hover:text-blue-600 font-medium py-3 px-4 rounded-lg transition-all duration-300 text-center text-sm"
-                    @click.stop
-                  >
-                    Google Maps
-                  </a>
-                  <a 
-                    href="https://yandex.ru/maps/?ll=71.335899,51.198839&z=17&pt=71.335899,51.198839,pm2rdm"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="flex-1 bg-white border-2 border-gray-200 hover:border-blue-600 text-gray-700 hover:text-blue-600 font-medium py-3 px-4 rounded-lg transition-all duration-300 text-center text-sm"
-                    @click.stop
-                  >
-                    Яндекс
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
         </div>

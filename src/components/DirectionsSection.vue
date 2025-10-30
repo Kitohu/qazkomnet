@@ -74,7 +74,7 @@ const waLink = computed(() => {
     ? 'Hello! I would like a consultation.'
     : 'Здравствуйте! Хочу получить консультацию.'
 
-  return `https://wa.me/77076100951?text=${encodeURIComponent(msg)}`
+  return `https://wa.me/77769771744?text=${encodeURIComponent(msg)}`
 })
 
 // Отрисовывать частицы только на десктопах и не в perf-low
