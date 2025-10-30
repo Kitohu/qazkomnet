@@ -132,6 +132,10 @@ export const messages = {
         terms: 'Условия использования'
       }
     },
+    partners: {
+      title: 'Наши партнёры',
+      subtitle: ''
+    },
     loading: {
       subtitle: 'IT-решения',
       messages: [
@@ -276,6 +280,10 @@ export const messages = {
         privacy: 'Privacy Policy',
         terms: 'Terms of Use'
       }
+    },
+    partners: {
+      title: 'Our partners',
+      subtitle: ''
     },
     loading: {
       subtitle: 'IT Solutions',

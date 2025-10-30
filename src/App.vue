@@ -17,6 +17,7 @@
           <DirectionsSection />
          
           <ServicesSection />
+          <PartnersGallery />
           <PartnersSection />
           <ContactsSection />
           <Footer />
@@ -41,6 +42,7 @@ import DirectionsSection from './components/DirectionsSection.vue'
 import AboutSection from './components/AboutSection.vue'
 import ServicesSection from './components/ServicesSection.vue'
 import PartnersSection from './components/PartnersSection.vue'
+import PartnersGallery from './components/PartnersGallery.vue'
 import ContactsSection from './components/ContactsSection.vue'
 import Footer from './components/Footer.vue'
 import ScrollToTop from './components/ScrollToTop.vue'
