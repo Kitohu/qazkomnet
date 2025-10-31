@@ -111,6 +111,7 @@ const navItems = computed(() => [
   { href: '#directions', label: t('header.nav.directions') },
   { href: '#about', label: t('header.nav.about') },
   { href: '#services', label: t('header.nav.services') },
+  { href: '#partners', label: t('header.nav.partners') },
   { href: '#contacts', label: t('header.nav.contacts') }
 ])
 

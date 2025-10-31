@@ -11,6 +11,16 @@ const contactInfo = computed(() => ({
   email: t('contacts.email')
 }))
 const bottomLinks = computed(() => t('contacts.bottom'))
+// Разрешаем ссылки футера: для "Партнеры/Partners" ведём на #partners
+const resolveFooterHref = (label) => {
+  const normalized = String(label).toLowerCase()
+  if (normalized.includes('партнер') || normalized.includes('partner')) return '#partners'
+  if (normalized.includes('о нас') || normalized.includes('about')) return '#about'
+  if (normalized.includes('услуг') || normalized.includes('service')) return '#services'
+  if (normalized.includes('контакт') || normalized.includes('contact')) return '#contacts'
+  if (normalized.includes('интеграц') || normalized.includes('integrat')) return '#directions'
+  return '#'
+}
 </script>
 <template>
   <footer id="contacts" class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-12 relative overflow-hidden">
@@ -58,7 +68,7 @@ const bottomLinks = computed(() => t('contacts.bottom'))
               v-for="link in companyLinks"
               :key="link"
             >
-              <a href="#" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:translate-x-2 hover:text-blue-400 block">{{ link }}</a>
+              <a :href="resolveFooterHref(link)" class="text-gray-400 hover:text-white transition-all duration-300 transform hover:translate-x-2 hover:text-blue-400 block">{{ link }}</a>
             </li>
           </ul>
         </div>
@@ -105,7 +115,7 @@ const bottomLinks = computed(() => t('contacts.bottom'))
         <div class="flex flex-col md:flex-row justify-between items-center">
           <p class="text-gray-400 mb-4 md:mb-0" v-html="bottomLinks.rights"></p>
           <div class="flex space-x-6 text-gray-400">
-           <!-- <a href="#" class="hover:text-white transition-colors duration-300">{{ bottomLinks.privacy }}</a>
+           w <a href="#" class="hover:text-white transition-colors duration-300">{{ bottomLinks.privacy }}</a>
             <a href="#" class="hover:text-white transition-colors duration-300">{{ bottomLinks.terms }}</a>-->
           </div>
         </div>

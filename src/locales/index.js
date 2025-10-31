@@ -6,6 +6,7 @@ export const messages = {
         directions: 'Направления',
         about: 'О компании',
         services: 'Услуги',
+        partners: 'Партнеры',
         contacts: 'Контакты'
       },
       switch: {
@@ -116,7 +117,7 @@ export const messages = {
     contacts: {
       tagline: 'Интегратор IT-решений для цифровой трансформации бизнеса',
       companyTitle: 'Компания',
-      companyLinks: ['О нас', 'Команда', 'Карьера', 'Новости'],
+      companyLinks: ['О нас', 'Команда', 'Карьера', 'Новости', 'Партнеры'],
       servicesTitle: 'Услуги',
       servicesLinks: ['Интеграция', 'Разработка', 'Поддержка', 'Консалтинг'],
       contactsTitle: 'Контакты',
@@ -155,6 +156,7 @@ export const messages = {
         directions: 'Directions',
         about: 'About',
         services: 'Services',
+        partners: 'Partners',
         contacts: 'Contacts'
       },
       switch: {
@@ -265,7 +267,7 @@ export const messages = {
     contacts: {
       tagline: 'IT solutions integrator for digital business transformation',
       companyTitle: 'Company',
-      companyLinks: ['About us', 'Team', 'Careers', 'News'],
+      companyLinks: ['About us', 'Team', 'Careers', 'News', 'Partners'],
       servicesTitle: 'Services',
       servicesLinks: ['Integration', 'Development', 'Support', 'Consulting'],
       contactsTitle: 'Contacts',
