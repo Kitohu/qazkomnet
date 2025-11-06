@@ -9,7 +9,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div data-aos="fade-right" data-aos-duration="800">
-          <img src="/hero_image_jdl6ff.svg" 
+          <img src="/illustration_circle_only.png" 
                alt="О компании" 
                class="server-image no-background"
                loading="lazy" decoding="async" />
