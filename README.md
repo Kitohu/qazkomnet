@@ -16,7 +16,6 @@ Built and delivered as a commercial project — bilingual, animation-heavy, and 
 
 ---
 
-
 ## About the project
 
 QAZKOMNET needed a presentation site that would look modern to enterprise clients — government agencies, hospitals, state institutions — while remaining usable on the older hardware those clients often browse from.
@@ -129,6 +128,6 @@ Chrome / Edge 88+, Firefox 85+, Safari 14+, and current mobile browsers. Older e
 
 <div align="center">
 
-Built by **Vahid Nabiev** · [Upwork]([https://www.upwork.com/freelancers/~01449709aa0c860ed9](https://www.upwork.com/freelancers/~01449709aa0c860ed9?mp_source=share])
+Built by **Vahid Nabiev** · [Upwork](https://www.upwork.com/freelancers/~01449709aa0c860ed9?mp_source=share)
 
 </div>
