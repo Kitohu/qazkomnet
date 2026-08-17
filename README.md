@@ -1,193 +1,135 @@
-# QAZKOMNET — сайт интегратора IT‑решений 🚀
+<div align="center">
 
-Небольшой лендинг на Vite + Vue 3 + Tailwind CSS с анимациями (AOS, кастомные CSS‑эффекты), локализацией (RU/EN) и CTA в WhatsApp.
+# QAZKOMNET
 
-## 🔧 Технологический стек
+**Corporate landing page for an IT systems integrator based in Astana, Kazakhstan.**
 
-- Vite 5 + Vue 3 (Composition API)
-- Tailwind CSS 3 + PostCSS + Autoprefixer
-- AOS (анимации при скролле)
-- VueUse (утилиты), GSAP (по желанию)
-- Простая i18n через `src/composables/useI18n.js` и `src/locales`
+Built and delivered as a commercial project — bilingual, animation-heavy, and engineered to stay smooth on low-end devices.
 
-## 📦 Быстрый старт
+[**Live site →**](https://qazkomnet.com)
 
-```powershell
-# 1) Установка зависимостей
-npm install
+![Vue](https://img.shields.io/badge/Vue-3.4-42b883?logo=vue.js&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-3.4-38bdf8?logo=tailwindcss&logoColor=white)
 
-# 2) Dev‑сервер с HMR
-npm run dev
-
-# 3) Продакшн‑сборка
-npm run build
-
-# 4) Предпросмотр собранной версии
-npm run preview
-```
-
-По умолчанию сервер поднимется на свободном порту (обычно 5173). Если порт занят, Vite предложит следующий.
-
-## 🧭 Структура разделов
-
-- `Header.vue` — шапка с логотипом QAZKOMNET, переключателем RU/EN и адаптивным меню
-- `HeroSection.vue` — блок «Нам доверяют» (логотипы партнёров)
-- `DirectionsSection.vue` — «Интегратор IT‑решений» с CTA в WhatsApp
-- `ScrollingBanner.vue` — «О компании» с анимированными счётчиками
-- `ServicesSection.vue` — карточки услуг
-- `PartnersSection.vue` — направления экспертизы (иконки lucide)
-- `ContactsSection.vue` — контакты, карта (OSM) и быстрые ссылки (2GIS/Google/Yandex)
-- `Footer.vue` — бегущая строка‑тикер
-- `AboutSection.vue` — нижний блок с логотипом, соц. и копирайтом
-- `LoadingScreen.vue` — загрузочный экран
-- `ScrollToTop.vue` — кнопка «наверх»
-
-## 💬 CTA в WhatsApp
-
-Кнопка «Оставить заявку» ведёт в WhatsApp и теперь содержит предзаполненный текст. Сообщение локализовано:
-
-- RU: «Здравствуйте! Хочу получить консультацию.»
-- EN: «Hello! I would like a consultation.»
-
-Ссылка формируется реактивно: `https://wa.me/77076100951?text=...`
-
-## 🎨 Анимации и эффекты
-
-Проект включает множество современных анимаций и интерактивных эффектов:
-
-### 🌟 Основные Анимации
-
-#### 1. **Загрузочный экран**
-- Анимированный градиентный фон
-- Прогресс-бар с плавным заполнением  
-- Пульсирующий логотип
-- Плавающие фоновые элементы
-- Анимированные точки загрузки
-
-#### 2. **Scroll-Triggered Анимации (AOS)**
-- `fade-up` - появление элементов снизу
-- `fade-left/right` - появление с боков
-- `zoom-in` - увеличение при появлении
-- Задержки для последовательной анимации
-
-#### 3. **Hover Эффекты**
-- **Кнопки**: масштабирование, свечение, волновой эффект
-- **Карточки**: подъем, поворот, изменение тени
-- **Изображения**: масштабирование, фильтры
-- **Ссылки**: подчеркивание, сдвиг текста
-
-#### 4. **Фоновые Анимации**
-- Плавающие геометрические фигуры
-- Градиентные переходы
-- Система частиц с взаимодействием с мышью
-- Параллакс эффекты
-
-#### 5. **Интерактивные Элементы**
-
-##### Header
-- Прозрачность при скролле
-- Анимированное мобильное меню
-- Подчеркивание ссылок при hover
-- Пульсирующий логотип
-
-##### Счетчики
-- Анимация чисел при появлении в viewport
-- Easing функции для плавности
-- Intersection Observer для триггера
-
-##### Навигация
-- Плавный скролл к секциям
-- Кнопка "наверх" с анимацией появления
-- Ripple эффект при клике
-
-### 🛠 Примеры CSS‑анимаций
-```css
-/* Плавающая анимация */
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-/* Градиентный сдвиг */
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Пульсирующее свечение */
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 rgba(59, 130, 246, 0.3); }
-  50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.6); }
-}
-```
-
-### Vue transitions
-- Переходы/транзишены для появления секций
-- Анимированная загрузка приложения
-
-### 🎯 Композабли (Composables)
-
-#### useAnimations.js
-- `useParallax()` - параллакс эффекты
-- `useScrollDirection()` - направление скролла
-- `useMouseParallax()` - следование за мышью
-
-#### useTextAnimations.js  
-- `useTypewriter()` - печатающий текст
-- `useScrollTrigger()` - триггеры скролла
-- `useStaggeredAnimation()` - последовательные анимации
-
-### 🎨 Кастомные Классы
-
-```css
-.hover-scale          /* Масштабирование при hover */
-.hover-glow           /* Свечение при hover */
-.card-hover           /* Эффекты для карточек */
-.btn-animated         /* Анимированные кнопки */
-.animate-float        /* Плавающие элементы */
-.animate-pulse-glow   /* Пульсирующее свечение */
-.animate-gradient     /* Анимированный градиент */
-.ripple               /* Волновой эффект */
-.text-shimmer         /* Мерцающий текст */
-```
-
-### 🚀 Специальные Эффекты
-
-#### Система Частиц
-- Canvas-based анимация
-- Интерактивность с мышью
-- Динамическое создание и удаление частиц
-- HSL цветовые переходы
-
-#### Счетчики с Анимацией
-- Intersection Observer API
-- Easing функции
-- Реактивные обновления Vue 3
-
-#### Responsive Анимации
-- Адаптация под разные размеры экранов
-- Отключение сложных анимаций на мобильных
-- Оптимизация производительности
-
-## 🧪 Проверка качества
-
-- Сборка: `vite build`
-- Линтинг/TS: не подключены (можно добавить ESLint/Prettier/TypeScript по желанию)
-- Тесты: не настроены (готов добавить vitest или jest)
-
-## 🎭 Производительность
-
-- Все анимации используют CSS transforms для оптимальной производительности
-- Passive event listeners для скролла
-- Debounced обработчики событий
-- RequestAnimationFrame для плавных анимаций
-
-## 🌐 Браузерная поддержка
-
-- Chrome/Edge 88+
-- Firefox 85+
-- Safari 14+
-- Современные мобильные браузеры
+</div>
 
 ---
+
+![Hero section](docs/screenshot-hero.png)
+
+## About the project
+
+QAZKOMNET needed a presentation site that would look modern to enterprise clients — government agencies, hospitals, state institutions — while remaining usable on the older hardware those clients often browse from.
+
+That constraint shaped most of the technical decisions here. The page is rich with motion: a canvas particle field, parallax layers, scroll-triggered reveals, animated counters, a full loading sequence. But every one of those effects is capability-gated, so a visitor on a six-year-old Android phone gets a fast static page instead of a stuttering one.
+
+## Features
+
+- **Bilingual RU / EN** with instant switching, no page reload, and the choice remembered between visits
+- **Motion that adapts to the device** — heavy effects are disabled automatically on low-memory or low-core hardware, and whenever the visitor has reduced motion enabled in their OS
+- **Interactive particle field** rendered on canvas, reacting to cursor movement
+- **Animated statistics** that count up when they scroll into view
+- **Partner gallery** showcasing the client's institutional customers
+- **Contacts block** with an embedded map and one-tap links to 2GIS, Google Maps and Yandex Maps
+- **WhatsApp call-to-action** with a pre-filled message in the visitor's current language
+- **Responsive down to small phones**, with touch-friendly targets throughout
+
+## Tech stack
+
+| Layer | Choice |
+|---|---|
+| Framework | Vue 3 (Composition API, `<script setup>`) |
+| Build | Vite 5 |
+| Styling | Tailwind CSS 3, PostCSS, Autoprefixer |
+| Animation | AOS for scroll reveals, GSAP, custom CSS keyframes, canvas |
+| Utilities | VueUse (`useIntersectionObserver`) |
+| Icons | lucide-vue-next |
+| Localization | custom — see below |
+
+## Engineering notes
+
+Three decisions worth explaining, since they're the reason the site behaves the way it does.
+
+### Performance budgeting by device capability
+
+Rather than shipping the same animation payload to everyone, the app classifies the device at startup:
+
+```js
+const isLowEndDevice = () => {
+  const lowRAM = navigator.deviceMemory <= 2
+  const lowCPU = navigator.hardwareConcurrency <= 4
+  const oldAndroid = /android\s(4|5|6|7)/.test(userAgent)
+  return lowRAM || lowCPU || oldAndroid
+}
+```
+
+If the device is constrained — or the visitor has `prefers-reduced-motion: reduce` set — a `perf-low` class lands on `<html>`, and from there:
+
+- the loading screen is skipped entirely and the page renders immediately
+- AOS is disabled, with shorter durations and larger debounce as a fallback
+- parallax and cursor-tracking effects bail out early instead of running per-frame work
+- CSS rules keyed on `.perf-low` drop the expensive shadows and filters
+
+The result is one codebase serving both a showcase experience and a lightweight one, decided at runtime.
+
+### A 58-line i18n layer instead of a dependency
+
+The site needs two languages and nothing else — no pluralization rules, no date formatting, no lazy-loaded locale bundles. Pulling in a full i18n library for that would have added weight for features the project will never use.
+
+Instead, `composables/useI18n.js` implements a small reactive translator over `provide` / `inject`: dot-path key lookup, graceful fallback to the raw key when a translation is missing, and a `locale` ref that persists to `localStorage` and syncs the `<html lang>` attribute. All copy lives in `locales/index.js` as a single nested object, which keeps translation edits to one file.
+
+### Scroll and pointer work off the critical path
+
+Every scroll and mousemove handler is registered `{ passive: true }` and throttled through `requestAnimationFrame` with a `ticking` guard, so no more than one update runs per frame. The parallax composable measures element geometry once on mount and on resize, rather than calling `getBoundingClientRect()` inside the scroll handler — which would force layout on every event.
+
+## Project structure
+
+```
+src/
+├── components/
+│   ├── LoadingScreen.vue      animated intro sequence
+│   ├── Header.vue             sticky nav, language switch, mobile menu
+│   ├── HeroSection.vue        client logos — "trusted by"
+│   ├── ScrollingBanner.vue    company intro with animated counters
+│   ├── DirectionsSection.vue  positioning statement + WhatsApp CTA
+│   ├── ServicesSection.vue    service cards
+│   ├── PartnersSection.vue    areas of expertise
+│   ├── PartnersGallery.vue    institutional client gallery
+│   ├── ContactsSection.vue    contacts, map, map-app deep links
+│   ├── ParticleSystem.vue     canvas particle field
+│   ├── ScrollToTop.vue
+│   ├── AboutSection.vue
+│   └── Footer.vue
+├── composables/
+│   ├── useI18n.js             reactive translation layer
+│   ├── useAnimations.js       parallax, scroll direction, cursor parallax
+│   └── useTextAnimations.js   typewriter, scroll triggers, stagger
+├── locales/index.js           RU / EN copy
+├── style.css                  Tailwind layers + custom keyframes
+├── App.vue
+└── main.js                    capability detection, AOS bootstrap
+```
+
+## Running locally
+
+Requires Node.js 20 or newer.
+
+```bash
+npm install
+npm run dev        # dev server with HMR, usually on :5173
+npm run build      # production build to dist/
+npm run preview    # serve the production build locally
+```
+
+## Browser support
+
+Chrome / Edge 88+, Firefox 85+, Safari 14+, and current mobile browsers. Older engines still get the full content — they simply fall through to the reduced-motion path.
+
+---
+
+<div align="center">
+
+Built by **Vahid Nabiev** · [Upwork](https://www.upwork.com/freelancers/~01449709aa0c860ed9)
+
+</div>
