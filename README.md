@@ -16,7 +16,6 @@ Built and delivered as a commercial project — bilingual, animation-heavy, and 
 
 ---
 
-![Hero section](docs/screenshot-hero.png)
 
 ## About the project
 
